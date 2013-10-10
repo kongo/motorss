@@ -1,7 +1,7 @@
 class ProposalsController < ApplicationController
 
   def index
-    @proposals = Proposal.limit(20)
+    @proposals = Proposal.limit(50)
 
     respond_to do |format|
       format.html
