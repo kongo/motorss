@@ -1,3 +1,4 @@
+ruby "2.0.0"
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -50,3 +51,5 @@ group :development, :test do
   gem 'rspec-rails', '<= 2.12'
   gem 'pry-rails'
 end
+
+gem 'rails_12factor', group: :production
