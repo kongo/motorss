@@ -14,7 +14,7 @@ module Parsers
         brand_model = item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[3]/td/span/strong").first.content.strip
 
         {
-          brand_name:     brand_model.split(" - ").first,
+          make:           brand_model.split(" - ").first,
           model_name:     brand_model.split(" - ").last,
           mileage:        item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[1].content.strip.gsub(' км,', ''),
           year_built:     item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[3].content.strip,
@@ -26,7 +26,7 @@ module Parsers
       end.compact
     end
 
-    # private
+    private
 
     def fetch_list_page_body(page_num = 1)
       offset = (page_num ? ((page_num - 1) * PER_PAGE).to_s : "show_all")
