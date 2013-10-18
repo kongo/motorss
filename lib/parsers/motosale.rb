@@ -22,6 +22,7 @@ module Parsers
           papers:         item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[4]/td").first.children[1].content.strip,
           link:           item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table/tr/td/a").first.attributes["href"].value,
           price:          item.xpath("div[1]/table/tbody/tr/td[2]/b").first.content.strip,
+          uin:            begin item.xpath("div[2]/table[2]/tbody/tr/td").first.children[2].content[4..-1] rescue next end,
           date_published: begin item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip rescue next end
         }
       end.compact
@@ -30,6 +31,7 @@ module Parsers
     private
 
     def fetch_list_page_body(page_num = 1)
+      return File.read("./spec/assets/list.html").force_encoding("CP1251")
       offset = (page_num ? ((page_num - 1) * PER_PAGE).to_s : "show_all")
       page_addr = "/index.php?search=moto&model=&price%5Bmin%5D=&price" +
         "%5Bmax%5D=&city=&in%5Bmin%5D=&in%5Bmax%5D=&run=&v=&type_obj=1&offset=" +
