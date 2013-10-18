@@ -53,8 +53,6 @@ module Parsers
     private
 
     def fetch_list_page_body(page_num = 1, vehicle_type_index = :all)
-      return File.read("./spec/assets/list.html").force_encoding("CP1251")
-
       offset       = (page_num ? ((page_num - 1) * PER_PAGE).to_s : "show_all")
       vehicle_type = VEHICLE_TYPES_BY_INDEX[vehicle_type_index]
 
