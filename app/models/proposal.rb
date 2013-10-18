@@ -3,7 +3,7 @@ class Proposal < ActiveRecord::Base
   VEHICLE_TYPES = [
     :classic, :neoclassic, :chopper, :sport, :sporttourist, :tourist,
     :enduro, :cross, :pitbike, :supermoto, :trial, :scooter,
-    :maxiscooter, :custom, :trike, :quadracycle, :snowmobile
+    :maxiscooter, :custom, :trike, :quadracycle, :watercraft, :snowmobile
   ]
 
   validates_inclusion_of :vehicle_type, in: VEHICLE_TYPES
