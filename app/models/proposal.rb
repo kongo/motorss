@@ -6,8 +6,9 @@ class Proposal < ActiveRecord::Base
     :maxiscooter, :custom, :trike, :quadracycle, :watercraft, :snowmobile
   ]
 
-  validates_inclusion_of :vehicle_type, in: VEHICLE_TYPES
-  validates_presence_of  :uin
+  validates_inclusion_of   :vehicle_type, in: VEHICLE_TYPES
+  validates_presence_of    :uin
+  validates_uniqueness_of  :uin
 
   default_scope ->() { order 'date_published desc' }
 
