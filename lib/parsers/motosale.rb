@@ -51,7 +51,7 @@ module Parsers
 
     private
 
-    def fetch_list_page_body(page_num = 1, vehicle_type_index = "")
+    def fetch_list_page_body(page_num = 1, vehicle_type_index = :all)
       offset       = (page_num ? ((page_num - 1) * PER_PAGE).to_s : "show_all")
       vehicle_type = VEHICLE_TYPES_BY_INDEX[vehicle_type_index]
 
