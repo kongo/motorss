@@ -10,7 +10,7 @@ class Proposal < ActiveRecord::Base
   validates_presence_of    :uin
   validates_uniqueness_of  :uin
 
-  default_scope ->() { order 'date_published desc' }
+  default_scope ->() { order 'uin desc' }
 
   def title
     "#{make} - #{model_name} (#{year_built}) - #{price}"
