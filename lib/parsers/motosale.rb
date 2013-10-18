@@ -16,7 +16,7 @@ module Parsers
 
         {
           make:           make,
-          model_name:     brand_model[(make.length - 3)..-1]
+          model_name:     brand_model[(make.length - 3)..-1],
           mileage:        item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[1].content.strip.gsub(' км,', ''),
           year_built:     item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[3].content.strip,
           papers:         item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[4]/td").first.children[1].content.strip,
