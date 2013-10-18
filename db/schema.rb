@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018020053) do
+ActiveRecord::Schema.define(version: 20131018043753) do
 
   create_table "proposals", force: true do |t|
     t.string   "make"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20131018020053) do
     t.datetime "updated_at"
     t.integer  "uin",                              null: false
     t.string   "vehicle_type",          limit: 20
+    t.string   "ms_photo_file_name",    limit: 40
   end
 
 end

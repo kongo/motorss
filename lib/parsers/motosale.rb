@@ -36,15 +36,16 @@ module Parsers
         make        = brand_model.split(" - ").first
 
         {
-          make:           make,
-          model_name:     brand_model[(make.length + 3)..-1],
-          mileage:        item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[1].content.strip.gsub(' км,', ''),
-          year_built:     item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[3].content.strip,
-          papers:         item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[4]/td").first.children[1].content.strip,
-          link:           item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table/tr/td/a").first.attributes["href"].value,
-          price:          item.xpath("div[1]/table/tbody/tr/td[2]/b").first.content.strip,
-          uin:            begin item.xpath("div[2]/table[2]/tbody/tr/td").first.children[2].content[4..-1].to_i rescue next end,
-          date_published: begin item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip rescue next end
+          make:               make,
+          model_name:         brand_model[(make.length + 3)..-1],
+          mileage:            item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[1].content.strip.gsub(' км,', ''),
+          year_built:         item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[5]/td").first.children[3].content.strip,
+          papers:             item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[4]/td").first.children[1].content.strip,
+          link:               item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table/tr/td/a").first.attributes["href"].value,
+          price:              item.xpath("div[1]/table/tbody/tr/td[2]/b").first.content.strip,
+          uin:                begin item.xpath("div[2]/table[2]/tbody/tr/td").first.children[2].content[4..-1].to_i rescue next end,
+          date_published:     begin item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip rescue next end,
+          ms_photo_file_name: item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[1]/td/a/img").first.attributes["src"].value[8..-1]
         }
       end.compact.reverse
     end
