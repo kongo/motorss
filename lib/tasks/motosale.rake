@@ -3,7 +3,8 @@ namespace :motosale do
   task :initial_pull => :environment do |cmd|
     @parser = Parsers::Motosale.new
 
-    Proposal::VEHICLE_TYPES.each do |vehicle_type|
+    # Proposal::VEHICLE_TYPES.each do |vehicle_type|
+    [:sport].each do |vehicle_type|
       @parser.fetch_list(nil, vehicle_type).each do |info|
         proposal = Proposal.new info.merge(vehicle_type: vehicle_type)
         Rails.logger.info "+ #{proposal.title}"

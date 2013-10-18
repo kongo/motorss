@@ -8,7 +8,7 @@ xml.rss :version => "2.0" do
     for proposal in @proposals
       xml.item do
         xml.title proposal.title
-        xml.description proposal.title + "\n" + proposal.description.to_s
+        xml.description proposal.title + "\n" + (image_tag proposal_photo_preview_url(proposal))  + proposal.description.to_s
         xml.pubDate proposal.date_published.to_s(:rfc822)
         xml.link proposal.full_link
         xml.guid proposal.full_link
