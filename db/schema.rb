@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018013632) do
+ActiveRecord::Schema.define(version: 20131018020053) do
 
   create_table "proposals", force: true do |t|
     t.string   "make"
@@ -30,7 +30,8 @@ ActiveRecord::Schema.define(version: 20131018013632) do
     t.datetime "date_vanished"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "uin",                   null: false
+    t.integer  "uin",                              null: false
+    t.string   "vehicle_type",          limit: 20
   end
 
 end
