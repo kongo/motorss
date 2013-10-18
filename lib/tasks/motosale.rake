@@ -5,9 +5,8 @@ namespace :motosale do
 
     Proposal::VEHICLE_TYPES.each do |vehicle_type|
       @parser.fetch_list(nil, vehicle_type).each do |info|
-        proposal = Proposal.new info.merge(vehicle_type: vehicle_type)
+        proposal = Proposal.create!(info.merge(vehicle_type: vehicle_type))
         Rails.logger.info "+ #{proposal.title}"
-        proposal.save!
       end
     end
 
@@ -29,7 +28,8 @@ namespace :motosale do
         @present_uins = Proposal.where(uin: @fetched_uins).pluck(:uin)
 
         @list.reject { |el| @present_uins.include? el[:uin] }.each do |info|
-          proposal = Proposal.create!(info.merge(vehicle_type: vehicle_type))
+         proposal = Proposal.create!(info.merge(vehicle_type: vehicle_type))
+         Rails.logger.info "+ #{proposal.title}"
         end
 
       end until @list.empty? || @present_uins.any?
