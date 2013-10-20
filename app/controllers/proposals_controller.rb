@@ -13,8 +13,11 @@ class ProposalsController < ApplicationController
 
   def search_items
     @proposals = Proposal.all
-    types = params['search']['vehicle_types'].reject{ |i| i.blank? }
-    @proposals = @proposals.where(vehicle_type: types) if types.any?
+    if params[:search].present?
+      types = params[:search][:vehicle_types].reject{ |i| i.blank? }
+      @proposals = @proposals.where(vehicle_type: types) if types.any?
+    end
+    @proposals
   end
 end
 
