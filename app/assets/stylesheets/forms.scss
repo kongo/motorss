@@ -1,5 +1,4 @@
 .checkboxes {
-  border: 1px dashed lightblue;
   display: block;
   .checkbox_container {
     display: block;
@@ -10,4 +9,8 @@
 
 .jumbotron {
   margin-top: 30px;
+}
+
+label.collection_check_boxes {
+  margin-left: 0.5em;
 }
