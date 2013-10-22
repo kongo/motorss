@@ -1,0 +1,26 @@
+
+.jumbotron
+  .container
+    %h1 Поиск мотоциклов
+    %hr
+    %p
+      = simple_form_for :search, html: { class: 'form-search', method: 'get' } do |f|
+        %h3 Класс
+        .checkboxes
+          = f.collection_check_boxes :vehicle_types, Proposal::VEHICLE_TYPES_NAMES, :first, :last, item_wrapper_class: 'checkbox_container'
+        %br
+        %br
+        %br
+        %h3 Документы
+        .checkboxes
+          = f.collection_check_boxes :papers_types, {with_papers: 'С документами', without_papers: 'Без документов', papers_not_required: 'Модель не для дорого общего пользования'}, :first, :last, item_wrapper_class: 'checkbox_container'
+        %br
+        %br
+        %br
+        %button.btn.btn-primary.btn-lg{ type: "submit" }
+          Искать
+
+- @proposals.each do |p|
+  .proposal
+    %h3= p.title
+    = image_tag proposal_photo_preview_url(p)

@@ -45,11 +45,14 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'nokogiri'
-
 group :development, :test do
   gem 'rspec-rails', '<= 2.12'
   gem 'pry-rails'
+  gem 'quiet_assets'
 end
 
 gem 'rails_12factor', group: :production
+
+gem 'nokogiri'
+gem 'simple_form'
+gem 'haml-rails'

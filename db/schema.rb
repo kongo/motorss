@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010053338) do
+ActiveRecord::Schema.define(version: 20131018091721) do
 
   create_table "proposals", force: true do |t|
     t.string   "make"
@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 20131010053338) do
     t.datetime "date_vanished"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "uin",                              null: false
+    t.string   "vehicle_type",          limit: 20
+    t.string   "ms_photo_file_name",    limit: 40
   end
+
+  add_index "proposals", ["uin"], name: "index_proposals_on_uin", using: :btree
 
 end
