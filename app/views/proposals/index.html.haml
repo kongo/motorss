@@ -1,5 +1,5 @@
 - content_for :head do
-  = auto_discovery_link_tag :rss, "/proposals.rss?" + request.query_string
+  = auto_discovery_link_tag :rss, current_rss_url
 
 .jumbotron
   .container
@@ -14,8 +14,15 @@
       .row
         = f.collection_check_boxes :paper_types, ProposalsController::PAPER_TYPES, :first, :last, item_wrapper_class: :'col-md-4'
 
-      %button.btn.btn-primary.btn-lg{ type: "submit" } Искать
-      %button.btn.btn-lg{ type: "reset" } Сбросить
+      .row
+        .col-md-8
+          %button.btn.btn-primary.btn-lg{ type: "submit" } Искать
+          %button.btn.btn-lg{ type: "reset" } Сбросить
+        .col-md-4
+          = link_to "http://cloud.feedly.com/#subscription%2Ffeed%2F" + URI::escape(current_rss_url), class: 'rss' do
+            +Feedly
+
+
 
 - @proposals.each do |p|
   .proposal

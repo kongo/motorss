@@ -1,5 +1,7 @@
 class ProposalsController < ApplicationController
 
+  before_filter :prepare_search_params, only: :index
+
   PAPER_TYPES = {
     'legal'   => 'С документами',
     'illegal' => 'Без документов',
@@ -32,10 +34,7 @@ class ProposalsController < ApplicationController
   end
 
   def index
-    search_params = params[SEARCH_KEY] || session[SEARCH_KEY] || {}
-    session[SEARCH_KEY] = search_params
-
-    @search= Search.new search_params
+    @search    = Search.new @search_params
     @proposals = search_items(@search).limit(100)
 
     respond_to do |format|
@@ -63,5 +62,18 @@ class ProposalsController < ApplicationController
 
     @proposals
   end
+
+  def prepare_search_params
+    @search_params = params[SEARCH_KEY] || session[SEARCH_KEY] || {}
+
+    session[SEARCH_KEY] = @search_params
+
+    redirect_to url_for(SEARCH_KEY => @search_params) if should_redirect_to_search?
+  end
+
+  def should_redirect_to_search?
+    params[SEARCH_KEY] != @search_params && request.format == 'html'
+  end
+
 end
 
