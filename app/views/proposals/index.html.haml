@@ -4,7 +4,11 @@
 .jumbotron
   .container
     %h2
-      = link_to 'Поиск мотоциклов', root_path
+      = link_to 'Поиск мотоциклов', root_path(reset: '')
+    %h5
+      добавьте адресную строку в rss-ридер
+    %hr
+
     = simple_form_for @search, url: "", html: { class: 'form-search', method: 'get'  } do |f|
 
       .row
@@ -34,7 +38,7 @@
         %h4= p.title
   %hr
 
-%ul.social-likes.pull-right
+%ul.social-likes.pull-right{ 'data-url' => 'http://motorss.herokuapp.com' }
   %li.facebook{ title: "Поделиться ссылкой на Фейсбуке" } Facebook
   %li.twitter{ title: "Поделиться ссылкой в Твиттере" } Twitter
   %li.vkontakte{ title: "Поделиться ссылкой во Вконтакте" } Вконтакте
