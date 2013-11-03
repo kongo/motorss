@@ -25,8 +25,11 @@
 
 
 - @proposals.each do |p|
-  .proposal
-    = link_to p.full_link, target: '_blank' do
-      %h3= p.title
-      = image_tag proposal_photo_preview_url(p)
+  .proposal.row
+    .col-md-2
+      = link_to p.full_link, target: '_blank' do
+        = image_tag proposal_photo_preview_url(p)
+    .col-md-10
+      = link_to p.full_link, target: '_blank' do
+        %h4= p.title
   %hr

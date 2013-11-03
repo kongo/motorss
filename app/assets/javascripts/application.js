@@ -19,7 +19,7 @@
 
 $(function() {
   $("button[type=reset]").click(function(event) {
-    $(event.currentTarget).parent('form').find("input[type=checkbox]").removeAttr("checked");
+    $(event.currentTarget).parents('form').find("input[type=checkbox]").removeAttr("checked");
   });
 })
 
