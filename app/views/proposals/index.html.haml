@@ -1,5 +1,7 @@
 - content_for :head do
   = auto_discovery_link_tag :rss, current_rss_url
+- content_for :javascript do
+  window.page = #{@page};
 
 .jumbotron
   .container
@@ -26,20 +28,15 @@
           = link_to "http://cloud.feedly.com/#subscription%2Ffeed%2F" + URI::escape(current_rss_url), class: 'rss' do
             +Feedly
 
-
-
-- @proposals.each do |p|
-  .proposal.row
-    .col-md-2
-      = link_to p.full_link, target: '_blank' do
-        = image_tag proposal_photo_preview_url(p)
-    .col-md-10
-      = link_to p.full_link, target: '_blank' do
-        %h4= p.title
-  %hr
+.proposals-container
+  = render partial: 'page'
+%button.btn.btn-success#page-next Показать ещё
 
 %ul.social-likes.pull-right{ 'data-url' => 'http://motorss.herokuapp.com' }
   %li.facebook{ title: "Поделиться ссылкой на Фейсбуке" } Facebook
   %li.twitter{ title: "Поделиться ссылкой в Твиттере" } Twitter
   %li.vkontakte{ title: "Поделиться ссылкой во Вконтакте" } Вконтакте
   %li.plusone{ title: "Поделиться ссылкой в Гугл-плюсе" } Google+
+
+%br
+%br

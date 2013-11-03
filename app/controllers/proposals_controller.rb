@@ -35,11 +35,13 @@ class ProposalsController < ApplicationController
 
   def index
     @search    = Search.new @search_params
-    @proposals = search_items(@search).limit(100)
+    @page      = params[:page] ? params[:page].to_i : 1
+    @proposals = search_items(@search).page(params[:page])
 
     respond_to do |format|
+      format.html { render partial: 'page', layout: false } if request.xhr?
       format.html
-      format.rss { render layout: false }
+      format.rss  { render layout: false }
     end
   end
 

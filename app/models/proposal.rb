@@ -42,6 +42,10 @@ class Proposal < ActiveRecord::Base
   validates_uniqueness_of  :uin
 
   default_scope ->() { order 'uin desc' }
+  scope :page, ->(num, per_page = 100) {
+    num = 1 unless num.present?
+    offset((num.to_i - 1) * per_page).limit(per_page)
+  }
 
   def title
     "#{make} - #{model_name} (#{year_built}) - #{price} - #{location}"

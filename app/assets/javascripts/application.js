@@ -21,5 +21,22 @@ $(function() {
   $("button[type=reset]").click(function(event) {
     $(event.currentTarget).parents('form').find("input[type=checkbox]").removeAttr("checked");
   });
+
+  $("#page-next").click(function(event) {
+    var path = window.location.pathname;
+    var connector = path.indexOf("?") == -1 ? "?" : "&";
+    path = path + connector + "page=" + (window.page + 1)
+    var btn = $(event.currentTarget);
+    btn.attr("disabled", "disabled");
+
+    $.get(path, function(data) {
+      $('.proposals-container').append(data);
+      window.page += 1;
+      btn.removeAttr("disabled");
+      if (data.length == 0) {
+        btn.replaceWith('Конец');
+      }
+    });
+  });
 })
 
