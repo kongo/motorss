@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018091721) do
+ActiveRecord::Schema.define(version: 20131103020957) do
 
   create_table "proposals", force: true do |t|
     t.string   "make"
@@ -36,5 +36,6 @@ ActiveRecord::Schema.define(version: 20131018091721) do
   end
 
   add_index "proposals", ["uin"], name: "index_proposals_on_uin", using: :btree
+  add_index "proposals", ["vehicle_type", "papers"], name: "index_proposals_on_vehicle_type_and_papers", using: :btree
 
 end
