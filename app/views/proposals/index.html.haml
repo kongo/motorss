@@ -6,8 +6,7 @@
     %h2 Поиск мотоциклов
     %hr
     %p
-      = simple_form_for @search_params, url: proposals_path, html: { class: 'form-search', method: 'get'  } do |f|
-        %h3 Класс
+      = simple_form_for @search, url: proposals_path, html: { class: 'form-search', method: 'get'  } do |f|
 
         .row
           = f.collection_check_boxes :vehicle_types, ProposalsController::VEHICLE_TYPES_NAMES, :first, :last, item_wrapper_class: :'col-md-4'
@@ -17,8 +16,8 @@
           = f.collection_check_boxes :paper_types, ProposalsController::PAPER_TYPES, :first, :last, item_wrapper_class: :'col-md-4'
 
         %br
-        %button.btn.btn-primary.btn-lg{ type: "submit" }
-          Поиск
+        %button.btn.btn-primary.btn-lg{ type: "submit" } Искать
+        %button.btn.btn-lg{ type: "reset" } Сбросить
 
 - @proposals.each do |p|
   .proposal

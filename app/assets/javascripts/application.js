@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+
+
+$(function() {
+  $("button[type=reset]").click(function(event) {
+    $(event.currentTarget).parent('form').find("input[type=checkbox]").removeAttr("checked");
+  });
+})
+

@@ -9,12 +9,17 @@ class ProposalsController < ApplicationController
     Proposal::VEHICLE_TYPES_NAMES.map {|x| [x.first.to_s, x.last]}
   ]
 
+  SEARCH_KEY = :proposals_controller_search
+
   class Search
     include ActiveModel::Model
     SEARCH_FIELDS = [:vehicle_types, :paper_types]
+    ARRAY_FIELDS  = [:vehicle_types, :paper_types]
     attr_accessor *SEARCH_FIELDS
 
     def initialize(data)
+      ARRAY_FIELDS.map { |f| send "#{f}=", {} }
+
       fields = data.map { |k, v| self.respond_to?(k) ? k : nil }.compact
 
       data = data.slice(*fields).map do |k, v|
@@ -27,8 +32,11 @@ class ProposalsController < ApplicationController
   end
 
   def index
-    @search_params = Search.new params[:proposals_controller_search]
-    @proposals = search_items(@search_params).limit(100)
+    search_params = params[SEARCH_KEY] || session[SEARCH_KEY] || {}
+    session[SEARCH_KEY] = search_params
+
+    @search= Search.new search_params
+    @proposals = search_items(@search).limit(100)
 
     respond_to do |format|
       format.html
