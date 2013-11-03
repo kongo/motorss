@@ -1,17 +1,21 @@
+- content_for :head do
+  = auto_discovery_link_tag :rss, "/proposals.rss?" + request.query_string
 
 .jumbotron
   .container
     %h1 Поиск мотоциклов
     %hr
     %p
-      = simple_form_for :search, html: { class: 'form-search', method: 'get' } do |f|
+      = simple_form_for @search_params, url: proposals_path, html: { class: 'form-search', method: 'get'  } do |f|
         %h3 Класс
 
         .row
-          = f.collection_check_boxes :vehicle_types, Proposal::VEHICLE_TYPES_NAMES, :first, :last, item_wrapper_class: :'col-md-4'
+          = f.collection_check_boxes :vehicle_types, ProposalsController::VEHICLE_TYPES_NAMES, :first, :last, item_wrapper_class: :'col-md-4'
+
         %h3 Документы
         .row
-          = f.collection_check_boxes :papers_types, {with_papers: 'С документами', without_papers: 'Без документов', papers_not_required: 'Не для ДОП'}, :first, :last, item_wrapper_class: :'col-md-4'
+          = f.collection_check_boxes :paper_types, ProposalsController::PAPER_TYPES, :first, :last, item_wrapper_class: :'col-md-4'
+
         %br
         %br
         %br

@@ -31,6 +31,11 @@ class Proposal < ActiveRecord::Base
     "Стоит на укр.учете",
     "Справка-счет на покупателя"
   ]
+  PAPER_TYPES_LEGAL_INDEXES = {
+    legal:   [4, 5, 6],
+    illegal: [1, 2, 3],
+    na:      [0]
+  }
 
   validates_inclusion_of   :vehicle_type, in: VEHICLE_TYPES
   validates_presence_of    :uin
