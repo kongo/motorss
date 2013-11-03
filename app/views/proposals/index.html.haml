@@ -3,21 +3,19 @@
 
 .jumbotron
   .container
-    %h2 Поиск мотоциклов
-    %hr
-    %p
-      = simple_form_for @search, url: proposals_path, html: { class: 'form-search', method: 'get'  } do |f|
+    %h2
+      = link_to 'Поиск мотоциклов', root_path
+    = simple_form_for @search, url: proposals_path, html: { class: 'form-search', method: 'get'  } do |f|
 
-        .row
-          = f.collection_check_boxes :vehicle_types, ProposalsController::VEHICLE_TYPES_NAMES, :first, :last, item_wrapper_class: :'col-md-4'
+      .row
+        = f.collection_check_boxes :vehicle_types, ProposalsController::VEHICLE_TYPES_NAMES, :first, :last, item_wrapper_class: :'col-md-4'
 
-        %h3 Документы
-        .row
-          = f.collection_check_boxes :paper_types, ProposalsController::PAPER_TYPES, :first, :last, item_wrapper_class: :'col-md-4'
+      %hr
+      .row
+        = f.collection_check_boxes :paper_types, ProposalsController::PAPER_TYPES, :first, :last, item_wrapper_class: :'col-md-4'
 
-        %br
-        %button.btn.btn-primary.btn-lg{ type: "submit" } Искать
-        %button.btn.btn-lg{ type: "reset" } Сбросить
+      %button.btn.btn-primary.btn-lg{ type: "submit" } Искать
+      %button.btn.btn-lg{ type: "reset" } Сбросить
 
 - @proposals.each do |p|
   .proposal
