@@ -66,13 +66,14 @@ class ProposalsController < ApplicationController
   def prepare_search_params
     @search_params = params[SEARCH_KEY] || session[SEARCH_KEY] || {}
 
+    @search_params = Hash[@search_params.map {|k, v| [k, v] if v.present? }]
     session[SEARCH_KEY] = @search_params
 
     redirect_to url_for(SEARCH_KEY => @search_params) if should_redirect_to_search?
   end
 
   def should_redirect_to_search?
-    params[SEARCH_KEY] != @search_params && request.format == 'html'
+    params[SEARCH_KEY].to_a != @search_params.to_a && request.format == 'html'
   end
 
 end
