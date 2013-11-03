@@ -44,8 +44,9 @@ module Parsers
             papers:         item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[4]/td").first.children[1].content.strip,
             link:           item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table/tr/td/a").first.attributes["href"].value,
             price:          item.xpath("div[1]/table/tbody/tr/td[2]/b").first.content.strip,
+            location:       item.xpath("div[1]/table/tbody/tr/td[2]/font").first.content.strip,
             uin:            item.xpath("div[2]/table[2]/tbody/tr/td").first.children[2].content[4..-1].to_i,
-            date_published: item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip,
+            date_published: item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip.strip,
             ms_photo_file_name: item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[1]/td/a/img").first.attributes["src"].value[8..-1]
           }
         else

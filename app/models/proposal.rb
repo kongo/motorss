@@ -44,7 +44,7 @@ class Proposal < ActiveRecord::Base
   default_scope ->() { order 'uin desc' }
 
   def title
-    "#{make} - #{model_name} (#{year_built}) - #{price}"
+    "#{make} - #{model_name} (#{year_built}) - #{price} - #{location}"
   end
 
   def full_link
