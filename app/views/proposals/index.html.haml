@@ -1,4 +1,7 @@
 - content_for :head do
+  = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"
+  = javascript_include_tag "social-likes.min"
+  = stylesheet_link_tag "social-likes.css"
   = auto_discovery_link_tag :rss, current_rss_url
 
 .jumbotron
@@ -33,3 +36,9 @@
       = link_to p.full_link, target: '_blank' do
         %h4= p.title
   %hr
+
+%ul.social-likes.pull-right
+  %li.facebook{ title: "Поделиться ссылкой на Фейсбуке" } Facebook
+  %li.twitter{ title: "Поделиться ссылкой в Твиттере" } Twitter
+  %li.vkontakte{ title: "Поделиться ссылкой во Вконтакте" } Вконтакте
+  %li.plusone{ title: "Поделиться ссылкой в Гугл-плюсе" } Google+
