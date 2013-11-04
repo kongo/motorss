@@ -23,9 +23,8 @@ $(function() {
   });
 
   $("#page-next").click(function(event) {
-    var path = window.location.pathname;
-    var connector = path.indexOf("?") == -1 ? "?" : "&";
-    path = path + connector + "page=" + (window.page + 1)
+    var connector = window.location.search.length == 0 ? "?" : "&";
+    var path = window.location.pathname + window.location.search + connector + "page=" + (window.page + 1)
     var btn = $(event.currentTarget);
     btn.attr("disabled", "disabled");
 
