@@ -66,7 +66,7 @@ class ProposalsController < ApplicationController
   end
 
   def prepare_search_params
-    @search_params = params[SEARCH_KEY] || session[SEARCH_KEY] || {}
+    @search_params = params[SEARCH_KEY] || {}
     @search_params = {} if params.keys.include? 'reset'
 
     @search_params = Hash[@search_params.map {|k, v| [k, v] if v.present? }]
