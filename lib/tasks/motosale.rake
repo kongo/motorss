@@ -38,4 +38,17 @@ namespace :motosale do
 
   end
 
+  task :remove_dead => :environment do |cmd|
+    @parser = Parsers::Motosale.new
+    @list = @parser.fetch_list nil
+    Proposal.find_each(batch_size: 200) do |p|
+
+      item = @list.find { |l| l[:uin] == p.uin }
+
+      Rails.logger.info (item.present? ? 'Alive' : 'Dead ') + "  [#{p.uin}] #{p.title}"
+
+      p.destroy if item.blank?
+    end
+  end
+
 end
