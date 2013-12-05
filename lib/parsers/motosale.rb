@@ -55,6 +55,25 @@ module Parsers
       end.compact
     end
 
+    def fetch_item_details(link)
+      page = Net::HTTP.get ENDPOINT, link
+      doc  = Nokogiri::HTML page
+      e    = doc.xpath '//body/table[1]/tr[2]/td[1]/table[1]/tr[1]/td[3]/table[1]/tr[1]/td[1]/div[3]/div[3]/table[1]'
+      {
+        mileage:      e.xpath('//tr[10]/td[2]').children.first.content.strip,
+        displacement: e.xpath('//tr[12]/td[2]').children.first.content.strip,
+        message:      e.xpath('//tr[14]/td[2]').children.reject {|r| r.attributes['id'].value == 'anti_parser' rescue false }.map(&:content).join(''),
+        author_name:  e.xpath('//tr[16]/td[2]').children[0].content,
+        phone:        e.xpath('//tr[16]/td[2]').children[3].content.strip,
+      }
+    end
+
+    def fetch_item_photos_urls(uin)
+      page = Net::HTTP.get ENDPOINT, "/gall.php?mID=#{uin}"
+      doc  = Nokogiri::HTML page
+      doc.css('img.foto').map {|x| x.attributes['src'].value }
+    end
+
     private
 
     def fetch_list_page_body(page_num = 1, vehicle_type_index = :all)
