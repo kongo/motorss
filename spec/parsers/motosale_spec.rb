@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Parsers::Motosale do
   describe "#fetch_list" do
     it "fetches the first page of the list of motos on sale" do
-      Net::HTTP.stub(:get).and_return File.read("./spec/assets/motosale.html").force_encoding("WINDOWS-1251")
+      Net::HTTP.stub(:get).and_return File.read("./spec/assets/list.html").force_encoding("WINDOWS-1251")
 
       m = Parsers::Motosale.new
       list = m.fetch_list nil
