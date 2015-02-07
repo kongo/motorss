@@ -2,6 +2,12 @@ require 'spec_helper'
 
 describe Parsers::Motosale do
   describe "#fetch_list" do
+    it "finds items correctly in the *actual* HTML" do
+      p = Parsers::Motosale.new
+      list = p.fetch_list 1
+      list.count.should == 10
+    end
+
     it "fetches the first page of the list of motos on sale" do
       Net::HTTP.stub(:get).and_return File.read("./spec/assets/list.html").force_encoding("WINDOWS-1251")
 
