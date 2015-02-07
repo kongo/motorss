@@ -3,122 +3,45 @@ require 'spec_helper'
 describe Parsers::Motosale do
   describe "#fetch_list" do
     it "fetches the first page of the list of motos on sale" do
-      Net::HTTP.stub(:get).and_return File.read("./spec/assets/list.html").force_encoding("CP1251")
+      Net::HTTP.stub(:get).and_return File.read("./spec/assets/motosale.html").force_encoding("WINDOWS-1251")
 
       m = Parsers::Motosale.new
       list = m.fetch_list nil
 
       list.should == 
-        [{:make=>"SUZUKI",
-          :model_name=>"Boulevard",
-          :mileage=>"20500",
-          :year_built=>"2002",
-          :papers=>"Справка-счет на покупателя",
-          :link=>"suzuki/Boulevard_289940.html",
-          :price=>"6200 у.е.",
-          :location=>"Днепропетровск",
-          :uin=>289940,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"neazrdfmt8uktvtyzu4n.jpg"},
-         {:make=>"HONDA",
-          :model_name=>"CRF 450 R",
-          :mileage=>"км,",
-          :year_built=>"2006",
-          :papers=>"Без документов",
-          :link=>"honda/CRF_450_R_289938.html",
-          :price=>"Дог. у.е.",
-          :location=>"Крым",
-          :uin=>289938,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"ek3grgkzqbctehvnn3pq.jpg"},
-         {:make=>"SUZUKI",
-          :model_name=>"GSX 650 F",
-          :mileage=>"км,",
-          :year_built=>"1999",
-          :papers=>"Стоит на укр.учете",
-          :link=>"suzuki/GSX_650_F_289936.html",
-          :price=>"Дог. у.е.",
-          :location=>"Днепропетровск",
-          :uin=>289936,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"vb2t9tx8stu3kph5zcqg.jpg"},
-         {:make=>"KAWASAKI",
-          :model_name=>"VN 900",
-          :mileage=>"25000",
-          :year_built=>"2008",
-          :papers=>"Стоит на укр.учете",
-          :link=>"kawasaki/VN_900_289935.html",
-          :price=>"8500 у.е.",
-          :location=>"Запорожье",
-          :uin=>289935,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"asfghd533fsxddrgtvva.jpg"},
-         {:make=>"VIPER",
-          :model_name=>"ATV",
-          :mileage=>"10000",
-          :year_built=>"2008",
-          :papers=>"Справка-счет на покупателя",
-          :link=>"viper/ATV_289934.html",
-          :price=>"Дог. у.е.",
-          :location=>"Киев",
-          :uin=>289934,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"4z8mgyhgbqtbefckskdu.jpg"},
-         {:make=>"SUZUKI",
-          :model_name=>"RF 600 R",
-          :mileage=>"36000",
-          :year_built=>"1998",
-          :papers=>"Стоит на укр.учете",
-          :link=>"suzuki/RF_600_R_289933.html",
-          :price=>"3200 у.е.",
-          :location=>"Днепропетровск",
-          :uin=>289933,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"y4vxanmpprgvtywqu9kq.jpg"},
-         {:make=>"ZONGSHEN",
-          :model_name=>"200",
-          :mileage=>"8000",
-          :year_built=>"2008",
-          :papers=>"Стоит на укр.учете",
-          :link=>"zongshen/200_289932.html",
-          :price=>"1300 у.е.",
-          :location=>"Донецк",
-          :uin=>289932,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"e6xyzynbtmngaaaaxvry.jpg"},
-         {:make=>"JAWA",
-          :model_name=>"638",
-          :mileage=>"5000",
-          :year_built=>"1991",
-          :papers=>"Снят с учета",
-          :link=>"jawa/638_289931.html",
-          :price=>"550 у.е.",
-          :location=>"Харьков",
-          :uin=>289931,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"kapppvxv8nykkd4tvgk7.jpg"},
-         {:make=>"HONDA",
-          :model_name=>"Varadero 125",
-          :mileage=>"3720",
-          :year_built=>"2001",
-          :papers=>"Стоит на укр.учете",
-          :link=>"honda/Varadero_125_289930.html",
-          :price=>"3150 у.е.",
-          :location=>"Чернигов",
-          :uin=>289930,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"db5tpxzau47cdrnxt87f.jpg"},
-         {:make=>"ИЖ",
-          :model_name=>"юпітєр 5",
-          :mileage=>"40",
-          :year_built=>"1987",
-          :papers=>"Стоит на укр.учете",
-          :link=>"izh/yupіtier_5_289929.html",
-          :price=>"1500 у.е.",
-          :location=>"Ровно",
-          :uin=>289929,
-          :date_published=>"10.10.2013",
-          :ms_photo_file_name=>"c4ze3pgeqkwpcxkyfnkw.jpg"}]
+
+        [
+          {
+            :make=>"YAMAHA", :model_name=>"XVS 950 A Midnight Star", :mileage=>"15000", :year_built=>"2010", :papers=>"Стоит на укр.учете", :link=>"yamaha/XVS_950_A_Midnight_Star_375006.html", :price=>"10500 $", :location=>"Одесса", :uin=>375006, :date_published=>"07.02.2015", :ms_photo_file_name=>"k4hcftndsmvdvwh69apg.jpg"
+          },
+          {
+            :make=>"YAMAHA", :model_name=>"YZF R1", :mileage=>"2000", :year_built=>"2012", :papers=>"Стоит на укр.учете", :link=>"yamaha/YZF_R1_375005.html", :price=>"1500 $", :location=>"Харьков", :uin=>375005, :date_published=>"07.02.2015", :ms_photo_file_name=>"ssgytragzhywpxcfxf4f.jpg"
+          },
+          {
+            :make=>"KAWASAKI", :model_name=>"Ninja 600 ZX-6R", :mileage=>"8531", :year_built=>"2011", :papers=>"Справка-счет на покупателя", :link=>"kawasaki/Ninja_600_ZX-6R_375003.html", :price=>"9300 $", :location=>"Киев", :uin=>375003, :date_published=>"07.02.2015", :ms_photo_file_name=>"zg5pwk2ggxdt54qm87sm.jpg"
+          },
+          {
+            :make=>"KAWASAKI", :model_name=>"Ninja 636 ZX-6R", :mileage=>"39000", :year_built=>"2007", :papers=>"Стоит на укр.учете", :link=>"kawasaki/Ninja_636_ZX-6R_375002.html", :price=>"4000 $", :location=>"Киев", :uin=>375002, :date_published=>"07.02.2015", :ms_photo_file_name=>"5r7vmzpswzxpwhwdpxkg.jpg"
+          },
+          {
+            :make=>"SUZUKI", :model_name=>"GSX 600", :mileage=>"6287", :year_built=>"2007", :papers=>"Модель не для дорог общего пользования", :link=>"suzuki/GSX_600_375001.html", :price=>"100 $", :location=>"Луцк", :uin=>375001, :date_published=>"07.02.2015", :ms_photo_file_name=>"tfgnrp3tsu49yhcderyz.jpg"
+          },
+          {
+            :make=>"HYOSUNG", :model_name=>"GT250R", :mileage=>"15945", :year_built=>"2006", :papers=>"Стоит на укр.учете", :link=>"hyosung/GT250R_375000.html", :price=>"2500 $", :location=>"Днепропетровск", :uin=>375000, :date_published=>"07.02.2015", :ms_photo_file_name=>"vadvvxvbnzr9u8b6cgqd.jpg"
+          },
+          {
+            :make=>"HONDA", :model_name=>"Deauville 650", :mileage=>"34200", :year_built=>"2003", :papers=>"Стоит на укр.учете", :link=>"honda/Deauville_650_374999.html", :price=>"4500 $", :location=>"Киев", :uin=>374999, :date_published=>"07.02.2015", :ms_photo_file_name=>"eeqgufzuahryzs8tud9p.jpg"
+          },
+          {
+            :make=>"HONDA", :model_name=>"CBR 300 R", :mileage=>"445", :year_built=>"2015", :papers=>"Без документов", :link=>"honda/CBR_300_R_374998.html", :price=>"22 $", :location=>"Ивано-Франковск", :uin=>374998, :date_published=>"07.02.2015", :ms_photo_file_name=>"d4wu3v6738fwwuqnfexf.jpg"
+          },
+          {
+            :make=>"YAMAHA", :model_name=>"YZ 450 F", :mileage=>"км,", :year_built=>"2008", :papers=>"Модель не для дорог общего пользования", :link=>"yamaha/YZ_450_F_374997.html", :price=>"3200 $", :location=>"Житомир", :uin=>374997, :date_published=>"07.02.2015", :ms_photo_file_name=>"zuapes8t3ehszwrvd3ft.jpg"
+          },
+          {
+            :make=>"KAWASAKI", :model_name=>"VN 2000", :mileage=>"27000", :year_built=>"2008", :papers=>"Стоит на укр.учете", :link=>"kawasaki/VN_2000_374996.html", :price=>"16000 $", :location=>"Житомир", :uin=>374996, :date_published=>"07.02.2015", :ms_photo_file_name=>"fkr27npsnttdrgx8pkvb.jpg"
+          }
+      ]
 
     end
   end

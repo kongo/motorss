@@ -29,10 +29,9 @@ module Parsers
 
     def fetch_list(page_num, vehicle_type_index = :all)
       doc = Nokogiri::HTML fetch_list_page_body(page_num, vehicle_type_index)
-      items = doc.xpath('//body/table[1]/tr[2]/td[1]/table[1]/tr[1]/td[3]/table[1]/tr[1]/td[1]/div[3]/div[not(@id)]')
+      items = doc.xpath('//body/table[1]/tr[2]/td[1]/table[1]/tr[1]/td[3]/table[1]/tr[1]/td[1]/div[4]/div[not(@id) and not(@class)]')
 
       items.map do |item|
-        unless item_is_specadv? item
           brand_model = item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[3]/td/span/strong").first.content.strip
           make        = brand_model.split(" - ").first
 
@@ -49,10 +48,7 @@ module Parsers
             date_published: item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip.strip,
             ms_photo_file_name: item.xpath("div[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tr[1]/td/a/img").first.attributes["src"].value[8..-1]
           }
-        else
-          nil
-        end
-      end.compact
+      end
     end
 
     def fetch_item_details(link)
@@ -87,10 +83,5 @@ module Parsers
       Net::HTTP.get ENDPOINT, page_addr
     end
 
-    def item_is_specadv?(item)
-      item.xpath("div[2]/table[2]/tbody/tr/td").first.children[1].content.strip.empty?
-    rescue
-      true
-    end
   end
 end
