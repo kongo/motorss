@@ -55,4 +55,4 @@ gem 'rails_12factor', group: :production
 
 gem 'simple_form'
 gem 'haml-rails'
-gem 'motosale_ua', git: 'git@github.com:kongo/motosale_ua.git'
+gem 'motosale_ua', git: 'https://github.com/kongo/motosale_ua.git'
