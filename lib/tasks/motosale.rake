@@ -1,10 +1,10 @@
 namespace :motosale do
 
   task :initial_pull => :environment do |cmd|
-    @parser = Parsers::Motosale.new
+    @scraper = MotosaleUa::Scraper.new
 
     Proposal::VEHICLE_TYPES.each do |vehicle_type|
-      @parser.fetch_list(nil, vehicle_type).each do |info|
+      @scraper.fetch_list(nil, vehicle_type).each do |info|
         proposal = Proposal.create!(info.merge(vehicle_type: vehicle_type))
         Rails.logger.info "+ #{proposal.title}"
       end
@@ -13,7 +13,7 @@ namespace :motosale do
   end
 
   task :update => :environment do |cmd|
-    @parser = Parsers::Motosale.new
+    @scraper = MotosaleUa::Scraper.new
 
     Proposal::VEHICLE_TYPES.each do |vehicle_type|
       page_num = 0
@@ -22,7 +22,7 @@ namespace :motosale do
       begin
         page_num     += 1
 
-        @list         = @parser.fetch_list(page_num, vehicle_type)
+        @list         = @scraper.fetch_list(page_num, vehicle_type)
 
         @fetched_uins = @list.map { |el| el[:uin] }
         @present_uins = Proposal.where(uin: @fetched_uins).pluck(:uin)
@@ -39,8 +39,8 @@ namespace :motosale do
   end
 
   task :remove_dead => :environment do |cmd|
-    @parser = Parsers::Motosale.new
-    @list = @parser.fetch_list nil
+    @scraper = MotosaleUa::Scraper.new
+    @list = @scraper.fetch_list nil
     Proposal.find_each(batch_size: 200) do |p|
 
       item = @list.find { |l| l[:uin] == p.uin }

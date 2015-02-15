@@ -86,6 +86,6 @@ class Proposal < ActiveRecord::Base
   end
 
   def full_link
-    "http://" + Parsers::Motosale::ENDPOINT + "/" + link
+    "http://" + MotosaleUa::Scraper::ENDPOINT + "/" + link
   end
 end

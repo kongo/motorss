@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:kongo/motosale_ua.git
+  revision: 5b2c0e01eca31c7d9e331e744985ada540856c2d
+  specs:
+    motosale_ua (0.0.1)
+      nokogiri (~> 1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -153,7 +160,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
-  nokogiri
+  motosale_ua!
   pg
   pry-rails
   quiet_assets
