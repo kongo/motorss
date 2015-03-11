@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/kongo/motosale_ua.git
-  revision: 68421de30deac559aaefbd6e237a97e916356a97
+  revision: e7c93b64f0440d151bc97fa24f81b7dba4dca8df
   specs:
     motosale_ua (0.0.1)
       nokogiri (~> 1.6)
